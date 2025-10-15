@@ -106,26 +106,26 @@ public class SM2SignatureUtil {
             throw new RuntimeException("SM2签名验证失败", e);
         }
     }
-
-    /**
-     * 根据示例格式生成签名
-     */
-    public static String generateSignatureByExample() {
-        // 示例参数
-        String privateKey = "a99d6978656355b570a19cc707b2ea68ed033c3fa436df9c0a15e84a06069c7b";
-        String sm4Key = "726be1646879423e26eb7977c4d80c48";
-
-        // 构建待签名字符串（注意：这里需要按照实际参数顺序拼接）
-        String sourceData = "datasetCode=HDSD.YYJL&medHosCode=med_hos_code_001&medOrgCode=med_org_code_001&requestId=1408c07c-bfbb-4135-a516-9232ac0a3bbf&tradeCode=1001&" + sm4Key;
-
-        System.out.println("待签名字符串: " + sourceData);
-
-        // 生成签名
-        String signature = generateSM2Signature(privateKey, sourceData);
-        System.out.println("生成的签名: " + signature);
-
-        return signature;
-    }
+//
+//    /**
+//     * 根据示例格式生成签名
+//     */
+//    public static String generateSignatureByExample() {
+//        // 示例参数
+//        String privateKey = "a99d6978656355b570a19cc707b2ea68ed033c3fa436df9c0a15e84a06069c7b";
+//        String sm4Key = "726be1646879423e26eb7977c4d80c48";
+//
+//        // 构建待签名字符串（注意：这里需要按照实际参数顺序拼接）
+//        String sourceData = "datasetCode=HDSD.YYJL&medHosCode=med_hos_code_001&medOrgCode=med_org_code_001&requestId=1408c07c-bfbb-4135-a516-9232ac0a3bbf&tradeCode=1001&" + sm4Key;
+//
+//        System.out.println("待签名字符串: " + sourceData);
+//
+//        // 生成签名
+//        String signature = generateSM2Signature(privateKey, sourceData);
+//        System.out.println("生成的签名: " + signature);
+//
+//        return signature;
+//    }
 
 //    public static void main(String[] args) {
 //        // 测试示例

@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * @author Mine
  * @version 1.0
- * 描述:
+ * 描述: 提供的样例加解密工具类
  * @date 2025/10/15 10:46
  */
 public class SM2AndSM4Utils {

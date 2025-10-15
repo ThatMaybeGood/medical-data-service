@@ -14,6 +14,7 @@ import com.medical.model.ApiRequest;
 import com.medical.model.ApiResponse;
 import com.medical.model.RequestHeader;
 import com.medical.util.CryptoUtils;
+import com.medical.util.SM2AndSM4Utils;
 import com.medical.util.SM2SignatureUtil;
 import com.medical.util.crypto.SM3Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -80,8 +81,8 @@ public class DataTransmissionService {
             ApiRequest apiRequest = new ApiRequest();
             apiRequest.setHeader(header);
             apiRequest.setRequestBiz(encryptedRequestBiz);
+            log.info(JSON.toJSONString(apiRequest));
 
-            log.info(apiRequest.toString());
             /*:
             应用程序后台通过 AppKey 及 AppSecret，通过 SM3 算法签名后调用平台接口，获取临时应用授权 Token
             */
@@ -144,18 +145,36 @@ public class DataTransmissionService {
         headerMap.put("platformCode", header.getPlatformCode());
         headerMap.put("timestamp", header.getTimestamp());
 
+//        String signature = cryptoUtils.sm2Sign(sm2PrivateKey, preSignature);
 
-        String preSignature = cryptoUtils.buildPreSignature(headerMap, sm4Key);
+//        String preSignature = SM2AndSM4Utils.buildPreSignature(headerMap, sm4Key);
+//        log.info("===============签名前数据: {}", preSignature);
+        // 生成签名
+//        String signature = SM2SignatureUtil.generateSM2Signature(sm2PrivateKey, preSignature);
+//        // 验证签名
+//        boolean isValid = SM2SignatureUtil.verifySM2Signature(sm2PublicKey, preSignature, signature);
+
+        /**
+        *使用提供的签名
+        *加解密代码示例
+         *
+         */
+        // 1、构建预签名字符串
+        String preSignature = SM2AndSM4Utils.buildPreSignature(headerMap, sm4Key);
         log.info("===============签名前数据: {}", preSignature);
 
-//        String signature = cryptoUtils.sm2Sign(sm2PrivateKey, preSignature);
-        // 生成签名
-        String signature = SM2SignatureUtil.generateSM2Signature(sm2PrivateKey, preSignature);
-        // 验证签名
-        boolean isValid = SM2SignatureUtil.verifySM2Signature(sm2PublicKey, preSignature, signature);
+        //2、通过私钥签名
+        String signature = SM2AndSM4Utils.sm2Sign(sm2PrivateKey, preSignature);
+        //添加到signature字段
+        header.setSignature(signature);
+        log.info("signature：" + signature);
+
+        // 公钥验证签名
+        boolean isValid = SM2AndSM4Utils.sm2Verify(sm2PublicKey, preSignature, signature);
         log.info("===============签名验证结果================: " + isValid);
 
-        header.setSignature(signature);
+        log.info("--------------------------------↑sm2加签↑---------------------------------");
+
 
         return header;
     }
