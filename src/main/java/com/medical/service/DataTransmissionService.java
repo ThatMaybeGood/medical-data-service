@@ -61,6 +61,27 @@ public class DataTransmissionService {
         this.tokenService = tokenService;
     }
 
+
+
+    /**
+     * 上传预约记录
+     */
+    public ApiResponse uploadAppointmentRecord(String medOrgCode, String medHosCode,String platformCode,
+                                               Object appointmentData) {
+        return uploadData(TradeCodeConstants.UP_INSERT_TRADE_CODE, DataCodeConstants.YYJL_DATASET_CODE,
+                medOrgCode, medHosCode,platformCode, appointmentData);
+    }
+
+    /**
+     * 上传挂号记录
+     */
+    public ApiResponse uploadRegistrationRecord(String medOrgCode, String medHosCode,String platformCode,
+                                                Object registrationData) {
+        return uploadData(TradeCodeConstants.UP_INSERT_TRADE_CODE, DataCodeConstants.GHJL_DATASET_CODE, medOrgCode, medHosCode,platformCode, registrationData);
+    }
+
+
+
     /**
      * 数据上传服务
      */
@@ -178,26 +199,5 @@ public class DataTransmissionService {
 
         return header;
     }
-
-    /**
-     * 上传预约记录
-     */
-    public ApiResponse uploadAppointmentRecord(String medOrgCode, String medHosCode,String platformCode,
-                                               Object appointmentData) {
-        return uploadData(TradeCodeConstants.UP_INSERT_TRADE_CODE, DataCodeConstants.YYJL_DATASET_CODE,
-                medOrgCode, medHosCode,platformCode, appointmentData);
-    }
-
-    /**
-     * 上传挂号记录
-     */
-    public ApiResponse uploadRegistrationRecord(String medOrgCode, String medHosCode,String platformCode,
-                                                Object registrationData) {
-        return uploadData(TradeCodeConstants.UP_INSERT_TRADE_CODE, DataCodeConstants.GHJL_DATASET_CODE, medOrgCode, medHosCode,platformCode, registrationData);
-    }
-
-
-
-
 
 }
