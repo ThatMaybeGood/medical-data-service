@@ -1,0 +1,20 @@
+# 激活开发环境配置
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+# 运行模式: dev-开发模式(使用模拟Token)
+medical:
+  mode: dev
+  platform:
+    base-url: http://ds-ucc.cq.hc:443/frontapi/api/v3/api/his/data/transmission
+    token-url: http://ds-ucc.cq.hc:443/frontapi/api/v1/auth/token
+  sm4-key: 726be1646879423e26eb7977c4d80c48
+  sm2-private-key: a99d6978656355b570a19cc707b2ea68ed033c3fa436df9c0a15e84a06069c7b
+  sm2-public-key: 04b674b6edfd08f754410b21cc3c8b522f318a1f1b27403bc63a290b7e1790d03d967d06c46e69357793967ff42a34d77ed5d7bb40d31b7f5ab0b0840017cff114
+  app-key: "1600385611615952896"
+  app-secret: "0b38eed02c94a5ae74a7fe5c82248768"
+
+
+
